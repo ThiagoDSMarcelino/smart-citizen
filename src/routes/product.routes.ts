@@ -1,9 +1,13 @@
-import { Router } from "express";
-import { CreateProductHandler } from "../modules/product/handlers/create-product.handler";
-import { DeleteProductHandler } from "../modules/product/handlers/delete-product.handler";
-import { ListProductsHandler } from "../modules/product/handlers/list-products.handler";
-import { UpdateProductHandler } from "../modules/product/handlers/update-product.handler";
-import { FindProductHandler } from "../modules/product/handlers/find-product.handler";
+import { Router, Request, Response } from "express";
+
+import { CreateProductHandler } from "../features/product/handlers/create-product.handler";
+import { DeleteProductHandler } from "../features/product/handlers/delete-product.handler";
+import { FindProductHandler } from "../features/product/handlers/find-product.handler";
+import { ListProductsHandler } from "../features/product/handlers/list-products.handler";
+import { UpdateProductHandler } from "../features/product/handlers/update-product.handler";
+import { createProductSchema } from "../features/product/validators/create-product.validator";
+import { checkSchema } from "express-validator";
+import { validateRequest } from "../shared/middlewares/validate-request.middleware";
 
 const productRouter = Router();
 
@@ -13,14 +17,24 @@ const getProduct = new FindProductHandler();
 const updateProduct = new UpdateProductHandler();
 const deleteProduct = new DeleteProductHandler();
 
-productRouter.post("/", (req, res) => createProduct.handle(req, res));
+productRouter.post(
+  "/",
+  checkSchema(createProductSchema),
+  validateRequest,
+  (req: Request, res: Response) => createProduct.handle(req, res)
+);
 
-productRouter.get("/", (req, res) => listProducts.handle(req, res));
-
-productRouter.get("/:id", (req, res) => getProduct.handle(req, res));
-
-productRouter.put("/:id", (req, res) => updateProduct.handle(req, res));
-
-productRouter.delete("/:id", (req, res) => deleteProduct.handle(req, res));
+productRouter.get("/", (req: Request, res: Response) =>
+  listProducts.handle(req, res)
+);
+productRouter.get("/:id", (req: Request, res: Response) =>
+  getProduct.handle(req, res)
+);
+productRouter.put("/:id", (req: Request, res: Response) =>
+  updateProduct.handle(req, res)
+);
+productRouter.delete("/:id", (req: Request, res: Response) =>
+  deleteProduct.handle(req, res)
+);
 
 export { productRouter };
