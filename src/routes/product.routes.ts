@@ -30,7 +30,7 @@ productRouter.get("/", (req: Request, res: Response) =>
 productRouter.get("/:id", (req: Request, res: Response) =>
   getProduct.handle(req, res)
 );
-productRouter.put("/:id", (req: Request, res: Response) =>
+productRouter.patch("/:id", (req: Request, res: Response) =>
   updateProduct.handle(req, res)
 );
 productRouter.delete("/:id", (req: Request, res: Response) =>
