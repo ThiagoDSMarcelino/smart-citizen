@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Between, ILike } from "typeorm";
+import { Between, ILike, LessThanOrEqual, MoreThanOrEqual } from "typeorm";
 import { AppDataSource } from "../../../data-source";
 import { Product } from "../product.entity";
 
@@ -25,8 +25,12 @@ export class ListProductsHandler {
         whereCondition.category = ILike(`%${category}%`);
       }
 
-      if (minPrice && maxPrice) {
-        whereCondition.price = Between(Number(minPrice), Number(maxPrice));
+      if (minPrice) {
+        whereCondition.price = MoreThanOrEqual(Number(minPrice));
+      }
+
+      if (maxPrice) {
+        whereCondition.price = LessThanOrEqual(Number(maxPrice));
       }
 
       const products = await this.repository.find({

@@ -8,6 +8,7 @@ import { UpdateProductHandler } from "../features/product/handlers/update-produc
 import { createProductSchema } from "../features/product/validators/create-product.validator";
 import { checkSchema } from "express-validator";
 import { validateRequest } from "../shared/middlewares/validate-request.middleware";
+import { updateProductSchema } from "../features/product/validators/update-product.validator";
 
 const productRouter = Router();
 
@@ -27,12 +28,18 @@ productRouter.post(
 productRouter.get("/", (req: Request, res: Response) =>
   listProducts.handle(req, res)
 );
+
 productRouter.get("/:id", (req: Request, res: Response) =>
   getProduct.handle(req, res)
 );
-productRouter.patch("/:id", (req: Request, res: Response) =>
-  updateProduct.handle(req, res)
+
+productRouter.patch(
+  "/:id",
+  checkSchema(updateProductSchema),
+  validateRequest,
+  (req: Request, res: Response) => updateProduct.handle(req, res)
 );
+
 productRouter.delete("/:id", (req: Request, res: Response) =>
   deleteProduct.handle(req, res)
 );

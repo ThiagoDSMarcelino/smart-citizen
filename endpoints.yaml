@@ -1,0 +1,180 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Smart Citizen
+meta:
+  id: wrk_4370b41876154d3c8fc8c13b53e804b8
+  created: 1764719603181
+  modified: 1764719613332
+  description: ""
+collection:
+  - url: "{{ _.apiUrl }}/products"
+    name: Get
+    meta:
+      id: req_9f31188013e247098b2abd613411e2f5
+      created: 1764719603199
+      modified: 1764819690015
+      isPrivate: false
+      description: ""
+      sortKey: -1764719603199
+    method: GET
+    parameters:
+      - name: name
+        value: Luxurious
+        description: ""
+        disabled: true
+      - name: category
+        value: pu
+        description: ""
+        disabled: true
+      - name: minPrice
+        value: "300"
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.apiUrl }}/products"
+    name: Create
+    meta:
+      id: req_9e90186781804f9bb1b3119720d1d157
+      created: 1764720607401
+      modified: 1764819057997
+      isPrivate: false
+      description: ""
+      sortKey: -1764453191941.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "{% faker 'randomProductName' %}",
+        	"price": {% faker 'randomPrice' %},
+        	"category": "{% faker 'randomProduct' %}",
+        	"stock": 10
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.apiUrl }}/products/:id"
+    name: Update
+    meta:
+      id: req_45a423c3668f421e8ca99ec81128f1fc
+      created: 1764818846570
+      modified: 1764820239693
+      isPrivate: false
+      description: ""
+      sortKey: -1764818846570
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"description": "batata"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+    pathParameters:
+      - name: id
+        value: 89b4c301-b47d-44b0-846a-aad7483e6dc1
+  - url: "{{ _.apiUrl }}/products/:id"
+    name: Delete
+    meta:
+      id: req_753c155285a140bf80f89a1ee9b512c4
+      created: 1764819298268
+      modified: 1764819305564
+      isPrivate: false
+      description: ""
+      sortKey: -1764809244210.5
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+    pathParameters:
+      - name: id
+        value: 015babfe-cb9c-4024-9c3e-5fa7865d0762
+  - url: "{{ _.apiUrl }}/products/:id"
+    name: Find
+    meta:
+      id: req_2e37bf89aafa4da79be0638e5a717309
+      created: 1764819566583
+      modified: 1764819577072
+      isPrivate: false
+      description: ""
+      sortKey: -1764804443030.75
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.1.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+    pathParameters:
+      - name: id
+        value: 89b4c301-b47d-44b0-846a-aad7483e6dc1
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_8790e15dd2d9e238dddd2f52f80f4f1b5559aeeb
+    created: 1764719603190
+    modified: 1764719603190
+environments:
+  name: Base Environment
+  meta:
+    id: env_8790e15dd2d9e238dddd2f52f80f4f1b5559aeeb
+    created: 1764719603188
+    modified: 1764720594935
+    isPrivate: false
+  data:
+    apiUrl: http://localhost:3000
