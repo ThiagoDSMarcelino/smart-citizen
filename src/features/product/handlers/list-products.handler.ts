@@ -25,11 +25,11 @@ export class ListProductsHandler {
         whereCondition.category = ILike(`%${category}%`);
       }
 
-      if (minPrice) {
+      if (minPrice && maxPrice) {
+        whereCondition.price = Between(Number(minPrice), Number(maxPrice));
+      } else if (minPrice) {
         whereCondition.price = MoreThanOrEqual(Number(minPrice));
-      }
-
-      if (maxPrice) {
+      } else if (maxPrice) {
         whereCondition.price = LessThanOrEqual(Number(maxPrice));
       }
 

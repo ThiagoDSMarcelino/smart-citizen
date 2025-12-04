@@ -7,6 +7,8 @@ docker-compose up -d
 
 yarn migration:run
 
+yarn build
+
 yarn start
 ```
 
@@ -32,7 +34,7 @@ Nesse endpoint há validação do body, seguindo esses parâmetros:
 Exemplo:
 
 ```json
-| {
+{
     "name": "Luxurious Marble Hat",
     "price": 324.49,
     "category": "Computer",
@@ -43,6 +45,13 @@ Exemplo:
 ### Listar todos os produtos
 
 `GET http://localhost:3000/products`
+
+Nesse endpoint é possível receber os seguintes query parameters:
+
+- name
+- category
+- minPrice
+- maxPrice
 
 ### Busca produto por ID
 
